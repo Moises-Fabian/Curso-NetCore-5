@@ -27,8 +27,17 @@ namespace ProductAPI.Controllers
 
         public IActionResult GetAllProduct()
         {
-           var product = productRepository.GetallProduct();
+            var product = productRepository.GetallProduct();
             return Ok(mapper.Map<List<ProductDTO>>(product));
+        }
+
+        [HttpGet("{id}")]
+
+        public IActionResult GetProduct(int id)
+        {
+            var product = productRepository.GetProduct(id);
+            if (product == null) return NotFound();
+            return Ok(mapper.Map<ProductDTO>(product));
         }
 
     }
