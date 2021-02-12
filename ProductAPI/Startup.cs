@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ProductAPI.Context;
+using ProductAPI.Models;
+using ProductAPI.Models.DTO;
 using ProductAPI.Repository;
 using ProductAPI.Repository.IRepository;
 using System;
@@ -34,6 +36,11 @@ namespace ProductAPI
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConectionstring")));
 
             services.AddScoped<ProductRepository, ProductRepository>();
+
+            services.AddAutoMapper(Configuration =>
+            {
+                Configuration.CreateMap<Product, ProductDTO>();
+            }, typeof(Startup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
