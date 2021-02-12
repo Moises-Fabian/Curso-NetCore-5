@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductAPI.Repository.IRepository
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
         IEnumerable<Product> GetallProduct();
 

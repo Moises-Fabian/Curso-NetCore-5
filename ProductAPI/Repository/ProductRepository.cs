@@ -1,4 +1,5 @@
-﻿using ProductAPI.Models;
+﻿using ProductAPI.Context;
+using ProductAPI.Models;
 using ProductAPI.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -9,44 +10,56 @@ namespace ProductAPI.Repository
 {
     public class ProductRepository : IProductRepository
     {
+        private readonly ApplicationDbContext context;
+
+        public ProductRepository(ApplicationDbContext context)
+{
+            this.context = context;
+        }
+
         public bool CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            context.Product.Add(product);
+            return Save();
         }
 
         public bool DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            context.Product.Remove(product);
+            return Save();
         }
 
         public IEnumerable<Product> GetallProduct()
         {
-            throw new NotImplementedException();
+            return context.Product.ToList();
         }
 
         public Product GetProduct(int id)
         {
-            throw new NotImplementedException();
+            return context.Product.FirstOrDefault(x => 
+            x.Id.Equals(id));
         }
 
         public bool ProductoExists(string name)
         {
-            throw new NotImplementedException();
+            return context.Product.Any(x => 
+            x.Name.ToLower().Trim().Equals(name.ToLower().Trim()));
         }
 
         public bool ProductoExists(int id)
         {
-            throw new NotImplementedException();
+            return context.Product.Any(x => x.Id.Equals(id));
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return context.SaveChanges() > 0 ? true : false;
         }
 
         public bool UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            context.Product.Update(product);
+            return Save();
         }
     }
 }
