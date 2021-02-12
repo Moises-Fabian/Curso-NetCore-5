@@ -40,6 +40,7 @@ namespace ProductAPI
             services.AddAutoMapper(Configuration =>
             {
                 Configuration.CreateMap<Product, ProductDTO>();
+                Configuration.CreateMap<ProductDTO, Product>();
             }, typeof(Startup));
 
             services.AddControllers();
