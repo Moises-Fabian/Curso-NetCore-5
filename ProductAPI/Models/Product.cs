@@ -8,6 +8,10 @@ namespace ProductAPI.Models
 {
     public class Product
     {
+        public Product()
+        {
+            CreateDate = DateTime.Now;
+        }
         [Key]
         public int Id { get; set; }
         [Required]

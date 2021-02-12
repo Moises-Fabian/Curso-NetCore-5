@@ -16,8 +16,6 @@ namespace ProductAPI.Models.DTO
 
         public double Precio { get; set; }
 
-        public DateTime CreateDate { get; set; }
-
         public byte[] Image { get; set; }
 
         public double Rating { get; set; }

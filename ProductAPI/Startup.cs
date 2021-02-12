@@ -35,7 +35,7 @@ namespace ProductAPI
             services.AddDbContext<ApplicationDbContext>(option => 
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConectionstring")));
 
-            services.AddScoped<ProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddAutoMapper(Configuration =>
             {

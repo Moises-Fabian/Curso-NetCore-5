@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProductAPI.Context
 {
+    //Contexto de datos
     public class ApplicationDbContext:DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options) : base(options)
