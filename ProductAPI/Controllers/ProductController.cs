@@ -62,5 +62,36 @@ namespace ProductAPI.Controllers
 
             return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
         }
+
+        [HttpPut("{id}")]
+        
+        public IActionResult UpdateProduct(int id, [FromBody] ProductDTO productDTO)
+        {
+            if (id != productDTO.Id) return BadRequest(ModelState);
+
+            var product = mapper.Map<Product>(productDTO);
+            if (!productRepository.UpdateProduct(product))
+            {
+                ModelState.AddModelError(string.Empty, $"ha ocurrido un error al actualizar el producto {productDTO.Name}");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteProduct(int id)
+        {
+            if (!productRepository.ProductoExists(id)) return NotFound();
+
+            var product = productRepository.GetProduct(id);
+
+            if (!productRepository.DeleteProduct(product))
+            {
+                ModelState.AddModelError(string.Empty, $"no se encontro el producto {product.Name}");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
     }
 }
