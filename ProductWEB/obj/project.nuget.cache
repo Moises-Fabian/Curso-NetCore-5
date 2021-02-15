@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FxQWsJTMkBXgh5fm3IN1XeJ9gYuwX6rTt2IpM35rwlU/kuwjrFyhOgTiH35YNSXF6OUm4pJZkom8Ih4eKJEhcg==",
+  "dgSpecHash": "g1xBjmtlCl8KbQZ1fIFUtuCIUNfvHgdXTPdBwpVRuguaJZimfxx9GkFCWbTl5Lb9t2O0a+uqHq2C18ZIIpbQOw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mlago\\source\\repos\\Product\\ProductWEB\\ProductWEB.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\mlago\\.nuget\\packages\\microsoft.codeanalysis.razor\\5.0.3\\microsoft.codeanalysis.razor.5.0.3.nupkg.sha512",
     "C:\\Users\\mlago\\.nuget\\packages\\microsoft.extensions.dependencymodel\\5.0.0\\microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",
     "C:\\Users\\mlago\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
+    "C:\\Users\\mlago\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\mlago\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\mlago\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\mlago\\.nuget\\packages\\system.reflection.metadata\\5.0.0\\system.reflection.metadata.5.0.0.nupkg.sha512",
