@@ -120,9 +120,43 @@ namespace ProductWEB.Repository
             return null;
         }
 
-        public Task<ModelStateError> UpdateAsync(string url, T entity)
+        public async Task<ModelStateError> UpdateAsync(string url, T entity)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Put, url);
+
+            request.Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, Resource.ContentType);
+
+            var HttpClient = httpClientFactory.CreateClient();
+
+            HttpResponseMessage response = await HttpClient.SendAsync(request);
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                return new ModelStateError()
+                {
+                    Response = new Response()
+                    {
+                        Errors = new List<Errors>()
+                        {
+                            new Errors(){ ErrorMessage = "No se encontró el producto que se quiere actualizar"}
+                        }
+                    }
+                };
+            }
+
+            if (response.StatusCode == HttpStatusCode.InternalServerError)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ModelStateError>(json);
+            }
+
+            return new ModelStateError()
+            {
+                Response = new Response()
+                {
+                    Errors = new List<Errors>()
+                }
+            };
         }
     }
 }
