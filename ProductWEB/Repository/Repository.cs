@@ -51,19 +51,73 @@ namespace ProductWEB.Repository
             };
         }
 
-        public Task<ModelStateError> DeleteAsync(string url, int id)
+        public async Task<ModelStateError> DeleteAsync(string url, int id)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Delete, url + id);
+
+            var httpClient = httpClientFactory.CreateClient();
+
+            HttpResponseMessage response = await httpClient.SendAsync(request);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return new ModelStateError()
+                {
+                    Response = new Response()
+                    {
+                        Errors = new List<Errors>()
+                        {
+                            new Errors(){ ErrorMessage = "No se encontró el producto que se quiere eliminar"}
+                        }
+                    }
+                };
+            }
+
+            if (response.StatusCode == HttpStatusCode.InternalServerError)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ModelStateError>(json);
+            }
+
+            return new ModelStateError()
+            {
+                Response = new Response()
+                {
+                    Errors = new List<Errors>()
+                }
+            };
         }
 
-        public Task<IEnumerable<T>> GetAllAsync(string url)
+        public async Task<IEnumerable<T>> GetAllAsync(string url)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var httpClient = httpClientFactory.CreateClient();
+
+            HttpResponseMessage response = await httpClient.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(json);
+            }
+
+            return null;
         }
 
-        public Task<T> GetAsync(string url, int id)
+        public async Task<T> GetAsync(string url, int id)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, url + id);
+
+            var httpClient = httpClientFactory.CreateClient();
+
+            HttpResponseMessage response = await httpClient.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+
+            return null;
         }
 
         public Task<ModelStateError> UpdateAsync(string url, T entity)
