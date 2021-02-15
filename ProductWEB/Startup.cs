@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProductWEB.Repository;
+using ProductWEB.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace ProductWEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
