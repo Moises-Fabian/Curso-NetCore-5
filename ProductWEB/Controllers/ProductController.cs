@@ -66,5 +66,50 @@ namespace ProductWEB.Controllers
             }
             return View(product);
         }
+
+        public async Task<ActionResult> Edit (int ? id)
+        {
+            if (id == null) return NotFound();
+
+            var product = await util.GetAsync(Resource.ProductAPIUrl, id.GetValueOrDefault());
+            if (product == null) return NotFound();
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<ActionResult> Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    byte[] imgBytes = null;
+                    using (Stream stream = files[0].OpenReadStream())
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            await stream.CopyToAsync(memoryStream);
+                            imgBytes = memoryStream.ToArray();
+                        }
+                    }
+                    product.Image = imgBytes;
+                }
+                var modelStateError = await util.UpdateAsync(Resource.ProductAPIUrl + product.Id, product);
+
+                if (modelStateError.Response.Errors.Count > 0)
+                {
+                    foreach (var item in modelStateError.Response.Errors)
+                    {
+                        product.Errors.Add(item);
+                    }
+                    return View(product);
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }
     }
 }

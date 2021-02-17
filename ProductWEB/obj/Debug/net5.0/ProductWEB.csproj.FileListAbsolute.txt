@@ -407,3 +407,4 @@ C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shar
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_RatingPartial.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Create.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_ButtonOptionPartial.cshtml.g.cs
+C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Edit.cshtml.g.cs
