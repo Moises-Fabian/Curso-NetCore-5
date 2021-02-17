@@ -22,7 +22,7 @@ namespace ProductWEB.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await util.GetAllAsync(Resource.ApiBaseUrl));
+            return View(await util.GetAllAsync(Resource.ProductAPIUrl));
         }
     }
 }
