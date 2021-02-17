@@ -405,3 +405,5 @@ C:\Users\mlago\source\repos\Product\ProductWEB\bin\Debug\net5.0\libman.json
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Index.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_TableButtonPartial.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_RatingPartial.cshtml.g.cs
+C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Create.cshtml.g.cs
+C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_ButtonOptionPartial.cshtml.g.cs
