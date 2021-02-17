@@ -48,12 +48,11 @@
                                     <td>@Html.DisplayFor(x => item.Name)</td>
                                     <td>@Html.DisplayFor(x => item.Description)</td>
                                     <td>@Html.DisplayFor(x => item.Price)</td>
-                                    <td width="120px">@Html.DisplayFor(x => item.Rating)</td>
+                                    <td width="120px">
+                                        <partial name="_RatingPartial" model="@item.Rating"/>
+                                    </td>
                                     <td>
-                                        <div class="btn-group">
-                                            <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn btn-primary btn-sm text-white"><i class="fa fa-pencil"></i></a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" title="Eliminar" class="btn btn-danger btn-sm text-white"><i class="fa fa-trash"></i></a>
-                                        </div>
+                                        <partial name="_tableButtonPartial" model="@item.Id"/>
                                     </td>
                                 </tr>
                             }
