@@ -62,3 +62,8 @@ C:\Users\mlago\source\repos\Product\ProductAPI\obj\Debug\net5.0\ProductAPI.pdb
 C:\Users\mlago\source\repos\Product\ProductAPI\obj\Debug\net5.0\ProductAPI.genruntimeconfig.cache
 C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\mlago\source\repos\Product\ProductAPI\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
