@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductWEB.Models;
 using ProductWEB.Utility;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProductWEB.Controllers
@@ -40,6 +43,14 @@ namespace ProductWEB.Controllers
                 }
 
                 if (modelStateError.Token == null) return View(user);
+
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, modelStateError.UserName));
+
+                foreach (var rolName in modelStateError.Roles)
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, rolName));
+                }
 
                 HttpContext.Session.SetString("Token", modelStateError.Token);
                 HttpContext.Session.SetString("UserName", modelStateError.UserName);
@@ -77,10 +88,16 @@ namespace ProductWEB.Controllers
             return View(user);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.SetString("Token", string.Empty);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
