@@ -409,3 +409,4 @@ C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Prod
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_ButtonOptionPartial.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Edit.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Product\Delete.cshtml.g.cs
+C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
