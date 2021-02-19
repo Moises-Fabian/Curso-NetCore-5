@@ -59,7 +59,8 @@ namespace ProductAPI
                     ValidateIssuer = false,
                     ValidateAudience = false
                 });
-                
+
+            services.AddCors();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -81,6 +82,8 @@ namespace ProductAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthentication();
 
