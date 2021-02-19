@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ProductWEB.Models;
 using ProductWEB.Repository.IRepository;
 using ProductWEB.Utility;
@@ -23,7 +24,7 @@ namespace ProductWEB.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await util.GetAllAsync(Resource.ProductAPIUrl));
+            return View(await util.GetAllAsync(Resource.ProductAPIUrl, HttpContext.Session.GetString("Token")));
         }
 
         public ActionResult Create()

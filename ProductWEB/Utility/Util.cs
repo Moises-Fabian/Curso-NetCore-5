@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -86,9 +87,14 @@ namespace ProductWEB.Utility
             };
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(string url)
+        public async Task<IEnumerable<T>> GetAllAsync(string url, string Token)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            if (Token.Length > 0)
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+            }
 
             var httpClient = httpClientFactory.CreateClient();
 
