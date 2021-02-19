@@ -61,7 +61,7 @@ namespace ProductWEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var modelStateError = await util.LoginAsync(Resource.RegisterAPIUrl, user);
+                var modelStateError = await util.RegisterAsync(Resource.RegisterAPIUrl, user);
                 if (modelStateError.Response.Errors.Count > 0)
                 {
                     foreach (var item in modelStateError.Response.Errors)
