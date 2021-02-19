@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using ProductAPI.Models;
 using ProductAPI.Models.DTO;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ProductAPI.Controllers
@@ -16,13 +22,17 @@ namespace ProductAPI.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration configuration;
 
         public UserController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+            SignInManager<IdentityUser> signInManager, 
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.configuration = configuration;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
@@ -53,6 +63,57 @@ namespace ProductAPI.Controllers
             }
 
             return StatusCode(404, ModelState);
+        }
+
+        [HttpPost ("Login")]
+
+        public async Task<ActionResult<UserTokenDTO>> Login([FromBody] UserDTO userDTO)
+        {
+            var result = await signInManager.PasswordSignInAsync(userDTO.Email, userDTO.Password, isPersistent: false, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                var user = await userManager.FindByEmailAsync(userDTO.Email);
+                var roles = await userManager.GetRolesAsync(user);
+                var token = CreateToken(user, roles);
+
+                return new UserTokenDTO
+                {
+                    Token = token,
+                    UserName = user.UserName,
+                    Roles = (List<string>)roles
+                };
+            }
+
+            ModelState.AddModelError("Response", "Nombre de usuario/contreña no válido");
+            return StatusCode(400, ModelState);
+
+        }
+
+        private string CreateToken(IdentityUser user, IList<string> roles)
+        {
+            var tokenHundler = new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWt:key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
+            };
+
+            foreach (var rolName in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, rolName));
+            }
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = creds
+            };
+
+            var token = tokenHundler.CreateToken(tokenDescriptor);
+            return tokenHundler.WriteToken(token);
         }
     }
 }
