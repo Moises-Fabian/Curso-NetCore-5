@@ -28,7 +28,7 @@ namespace ProductWEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<ActionResult> Login (User user)
+        public async Task<IActionResult> Login (User user)
         {
             if (ModelState.IsValid)
             {
@@ -51,6 +51,10 @@ namespace ProductWEB.Controllers
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, rolName));
                 }
+
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 HttpContext.Session.SetString("Token", modelStateError.Token);
                 HttpContext.Session.SetString("UserName", modelStateError.UserName);

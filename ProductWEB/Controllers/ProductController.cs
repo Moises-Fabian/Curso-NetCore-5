@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductWEB.Models;
 using ProductWEB.Repository.IRepository;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ProductWEB.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
@@ -26,7 +28,7 @@ namespace ProductWEB.Controllers
         {
             return View(await util.GetAllAsync(Resource.ProductAPIUrl, HttpContext.Session.GetString("Token")));
         }
-
+        [Authorize(Roles ="admin")]
         public ActionResult Create()
         {
             return View(new Product());
@@ -67,7 +69,7 @@ namespace ProductWEB.Controllers
             }
             return View(product);
         }
-
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();

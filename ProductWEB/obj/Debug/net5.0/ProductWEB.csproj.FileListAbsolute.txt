@@ -412,3 +412,4 @@ C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Prod
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\mlago\source\repos\Product\ProductWEB\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs
