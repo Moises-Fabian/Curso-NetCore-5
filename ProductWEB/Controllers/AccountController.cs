@@ -48,5 +48,39 @@ namespace ProductWEB.Controllers
             }
             return View(user);
         }
+
+        public IActionResult Register()
+        {
+            return View(new User());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<ActionResult> Register(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelStateError = await util.LoginAsync(Resource.LoginAPIUrl, user);
+                if (modelStateError.Response.Errors.Count > 0)
+                {
+                    foreach (var item in modelStateError.Response.Errors)
+                    {
+                        user.Errors.Add(item);
+                    }
+                    return View(user);
+                }
+
+                return RedirectToAction(nameof(Login));
+
+            }
+            return View(user);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("Token", string.Empty);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
