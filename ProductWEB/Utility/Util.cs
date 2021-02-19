@@ -167,7 +167,9 @@ namespace ProductWEB.Utility
 
             HttpResponseMessage response = await HttpClient.SendAsync(request);
 
-            if (response.StatusCode == HttpStatusCode.NotFound|| response.StatusCode == HttpStatusCode.InternalServerError)
+            if (response.StatusCode == HttpStatusCode.NotFound|| 
+                response.StatusCode == HttpStatusCode.BadRequest ||
+                response.StatusCode == HttpStatusCode.InternalServerError)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<ModelStateError>(json);
@@ -195,7 +197,9 @@ namespace ProductWEB.Utility
 
             HttpResponseMessage response = await HttpClient.SendAsync(request);
 
-            if (response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.InternalServerError)
+            if (response.StatusCode == HttpStatusCode.NotFound ||
+                response.StatusCode == HttpStatusCode.BadRequest ||
+                response.StatusCode == HttpStatusCode.InternalServerError)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<ModelStateError>(json);

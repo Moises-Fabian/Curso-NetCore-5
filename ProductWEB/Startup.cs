@@ -27,6 +27,7 @@ namespace ProductWEB
         {
             services.AddHttpClient();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddHttpContextAccessor();
             services.AddSession(option =>
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(10);

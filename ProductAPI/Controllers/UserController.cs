@@ -62,7 +62,7 @@ namespace ProductAPI.Controllers
                 ModelState.TryAddModelError("Response", item.Description);
             }
 
-            return StatusCode(404, ModelState);
+            return StatusCode(400, ModelState);
         }
 
         [HttpPost ("Login")]
