@@ -3,7 +3,7 @@ Proyecto que he realizado mediante un curso de udemy en el cual consiste en Crea
 
 Mediante el curso pudo adquirir los siguientes conocimientos:
 
--Crear API RESTful en ASP NET Core-
+-Crear API RESTful en ASP NET Core 5
 -Implementar autenticación y autorización en un Web API.
 -Implementar el patrón de repositorio.
 -Consumir API mediante HTTPClient.
